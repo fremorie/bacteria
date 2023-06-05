@@ -1,5 +1,6 @@
 import React from "react";
 
+import { drawBrownianMition } from "#utils/brownianMotion";
 import * as S from "./styles";
 
 type Props = {
@@ -10,15 +11,33 @@ type Props = {
 const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
-  React.useEffect(() => {
+  const drawBacteria = () => {
     if (!canvasRef.current) return;
 
-    const ctx = canvasRef.current.getContext("2d") as CanvasRenderingContext2D;
-    ctx.moveTo(0, 0);
-    ctx.lineTo(200, 100);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+    window.requestAnimationFrame(drawBrownianMition(canvas, ctx));
+  };
+
+  const drawGlucose = () => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+    window.requestAnimationFrame(drawBrownianMition(canvas, ctx));
+  };
+
+  React.useEffect(() => {
+    drawBacteria();
   }, []);
 
-  return <S.Canvas ref={canvasRef} />;
+  React.useEffect(() => {
+    drawGlucose();
+  }, []);
+
+  return <S.Canvas height="300px" width="500px" ref={canvasRef} />;
 };
 
 export default Reactor;
