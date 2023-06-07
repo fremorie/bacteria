@@ -114,7 +114,6 @@ export const captureTouch = (element) => {
  * @return {string|number}
  */
 export const parseColor = (color, toNumber) => {
-  console.log({ color });
   if (toNumber === true) {
     if (typeof color === "number") {
       return color | 0; //chop off decimal
@@ -127,7 +126,6 @@ export const parseColor = (color, toNumber) => {
     if (typeof color === "number") {
       color = "#" + ("00000" + (color | 0).toString(16)).substr(-6); //pad
     }
-    console.log("res", color);
     return color;
   }
 };

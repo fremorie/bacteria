@@ -1,4 +1,5 @@
 import * as utils from "./utils";
+import { parameters, prepareCanvasData, solve, initial_state } from "#utils";
 
 function Ball(radius, color) {
   if (radius === undefined) {
@@ -80,13 +81,13 @@ export const drawBrownianMition = (
   bacteria = {
     dotColor: "#57BF24",
     dotRadius: 5,
-    numDots: 50,
+    numDots: 0,
     friction: 0.95,
   },
   glucose = {
     dotColor: "#F9F7A4",
     dotRadius: 3,
-    numDots: 20,
+    numDots: 0,
     friction: 0.95,
   }
 ) => {
@@ -101,22 +102,76 @@ export const drawBrownianMition = (
     dotColor: dotColorGlucose,
   } = glucose;
 
-  const bacteriaDots = generateDots(
+  let bacteriaDots = generateDots(
     canvas,
     numDotsBacteria,
     dotRadiusBacteria,
     dotColorBacteria
   );
-  const glucoseDots = generateDots(
+
+  let glucoseDots = generateDots(
     canvas,
     numDotsGlucose,
     dotRadiusGlucose,
     dotColorGlucose
   );
 
+  let reactorState = initial_state;
+  let canvasState = prepareCanvasData(reactorState);
+
+  let time = new Date().getTime();
+
+  const simulationSpeed = 0.1;
+
   return function drawFrame() {
+    const timeDiff = new Date().getTime() - time;
+    time = new Date().getTime();
+
     window.requestAnimationFrame(drawFrame, canvas);
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    const nextState = solve(
+      1000,
+      timeDiff * simulationSpeed * 1e-6,
+      reactorState,
+      parameters
+    );
+    reactorState = nextState;
+    canvasState = prepareCanvasData(nextState);
+
+    if (canvasState.bacteriaCount > bacteriaDots.length) {
+      bacteriaDots = [
+        ...bacteriaDots,
+        ...generateDots(
+          canvas,
+          canvasState.bacteriaCount - bacteriaDots.length,
+          dotRadiusBacteria,
+          dotColorBacteria
+        ),
+      ];
+    }
+
+    if (canvasState.bacteriaCount < bacteriaDots.length) {
+      const deleteCount = bacteriaDots.length - canvasState.bacteriaCount;
+      bacteriaDots.splice(0, deleteCount);
+    }
+
+    if (canvasState.glucoseCount > glucoseDots.length) {
+      glucoseDots = [
+        ...glucoseDots,
+        ...generateDots(
+          canvas,
+          canvasState.glucoseCount - glucoseDots.length,
+          dotRadiusGlucose,
+          dotColorGlucose
+        ),
+      ];
+    }
+
+    if (canvasState.glucoseCount < glucoseDots.length) {
+      const deleteCount = glucoseDots.length - canvasState.glucoseCount;
+      glucoseDots.splice(0, deleteCount);
+    }
 
     bacteriaDots.forEach((dot) =>
       draw(dot, canvas, context, bacteria.friction)

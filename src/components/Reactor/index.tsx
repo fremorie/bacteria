@@ -1,6 +1,12 @@
 import React from "react";
 
 import { drawBrownianMition } from "#utils/brownianMotion";
+import {
+  solve,
+  initial_state,
+  parameters,
+  prepareCanvasData,
+} from "#utils/index";
 import * as S from "./styles";
 
 type Props = {
@@ -15,7 +21,7 @@ const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
 
     window.requestAnimationFrame(drawBrownianMition(canvas, ctx));
   };
@@ -24,7 +30,7 @@ const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
 
     window.requestAnimationFrame(drawBrownianMition(canvas, ctx));
   };

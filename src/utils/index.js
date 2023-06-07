@@ -22,10 +22,91 @@ export const parameters = {
 };
 
 export const initial_state = {
-  X: 1,
+  // bacteria count (relative, grams)
+  X: 0.1,
+  // glucose count (grams)
   S: 5,
+  // acetate
   A: 0,
+  // dissolved oxygen tension
   DOTa: 1,
+};
+
+export const MAX_STATE = {
+  X: 20,
+  S: 20,
+  A: 10,
+  DOTa: 1,
+};
+
+export const MAX_DOTS = {
+  X: 1000,
+  S: 100,
+};
+
+export const formatBacteria = (X) => {
+  if (X < 0.1) {
+    return 0;
+  }
+  return Math.ceil((X / MAX_STATE.X) * MAX_DOTS.X);
+};
+
+export const formatGlucose = (S) => {
+  return Math.round((S / MAX_STATE.S) * MAX_DOTS.S);
+};
+
+const COLORS = {
+  A: [
+    [0, 0, 0],
+    [0, 255, 0],
+  ],
+  DOTa: [
+    [0, 0, 0],
+    [0, 0, 255],
+  ],
+};
+
+const formatAcetateColor = (A) => {
+  const alpha = Math.min(A / MAX_STATE.A, 1);
+  const color = COLORS.A[0].map(
+    (rgb, index) => rgb * alpha + (1 - alpha) * COLORS.A[1][index]
+  );
+
+  return color;
+};
+
+const formatOxygenColor = (DOTa) => {
+  const alpha = DOTa / MAX_STATE.DOTa;
+  //const color = alpha * COLORS.DOTa[0] + (1 - alpha) * COLORS.DOTa[1]
+  const color = COLORS.DOTa[0].map(
+    (rgb, index) => rgb * alpha + (1 - alpha) * COLORS.DOTa[1][index]
+  );
+
+  return color;
+};
+
+const sumColors = (colorA, colorB) => {
+  return colorA.map((a, index) => Math.floor(a + colorB[index]));
+};
+
+export const feed = (state) => {
+  const feedInc = 1;
+
+  return {
+    ...state,
+    S: state.S + feedInc,
+  };
+};
+
+export const prepareCanvasData = (state) => {
+  return {
+    bacteriaCount: formatBacteria(state.X),
+    glucoseCount: formatGlucose(state.S),
+    color: sumColors(
+      formatOxygenColor(state.DOTa),
+      formatAcetateColor(state.A)
+    ),
+  };
 };
 
 function f(state, parameters) {
