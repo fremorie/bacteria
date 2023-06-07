@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   padding: 20px;
 `;
 

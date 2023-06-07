@@ -18,12 +18,20 @@ const App = () => {
     },
   });
 
+  const [speedState, setSpeed] = React.useState<any>({
+      getSpeed: () => ({
+    X: 0,
+    A: 0,
+    S: 0,
+    DOTa: 0,
+  })})
+
   return (
     <S.Page>
       <S.Container>
-        <Stats bacteriaSpeed={100} acetateSpeed={80} glucoseSpeed={-50} />
+        <Stats getSpeed={speedState.getSpeed} />
         <S.ButtonContainer>
-          <Reactor setOnFeed={(feed: any) => setOnFeed(feed)} />
+          <Reactor setOnFeed={(feed: any) => setOnFeed(feed)} setSpeed={(currentSpeed: any) => setSpeed(currentSpeed)} />
           <FeedButton onClick={feedState.feed} />
         </S.ButtonContainer>
         <S.GlobalStyle />

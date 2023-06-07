@@ -90,7 +90,6 @@ const sumColors = (colorA, colorB) => {
 };
 
 export const feed = (state) => {
-  console.log("feed");
   const feedInc = 10;
 
   return {

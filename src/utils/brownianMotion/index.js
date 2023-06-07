@@ -97,7 +97,8 @@ export const drawBrownianMition = (
     numDots: 0,
     friction: 0.95,
   },
-  setOnFeed = () => {}
+  setOnFeed = () => {},
+  setSpeed = () => {},
 ) => {
   const {
     numDots: numDotsBacteria,
@@ -140,7 +141,6 @@ export const drawBrownianMition = (
 
   setOnFeed({
     feed: () => {
-      console.log("set on feed");
       reactorState = feed(reactorState);
     },
   });
@@ -175,6 +175,10 @@ export const drawBrownianMition = (
     maxSpeed.S = formatSpeed("S");
     maxSpeed.A = formatSpeed("A");
     maxSpeed.DOTa = formatSpeed("DOTa");
+
+    setSpeed({
+      getSpeed: () => maxSpeed
+    })
 
     reactorState = nextState;
     canvasState = prepareCanvasData(nextState);
