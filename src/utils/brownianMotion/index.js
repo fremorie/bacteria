@@ -2,6 +2,7 @@ import * as utils from "./utils";
 import {
   parameters,
   prepareCanvasData,
+  derivatives,
   solve,
   initial_state,
   MAX_SPEED,
@@ -55,14 +56,18 @@ function draw(dot, canvas, context, friction) {
   dot.vy *= friction;
 
   if (dot.x > canvas.width) {
-    dot.x = 0;
-  } else if (dot.x < 0) {
     dot.x = canvas.width;
+    dot.vx = -dot.vx;
+  } else if (dot.x < 0) {
+    dot.x = 0;
+    dot.vx = -dot.vx;
   }
   if (dot.y > canvas.height) {
-    dot.y = 0;
-  } else if (dot.y < 0) {
     dot.y = canvas.height;
+    dot.vy = -dot.vy;
+  } else if (dot.y < 0) {
+    dot.y = 0;
+    dot.vy = -dot.vy;
   }
   dot.draw(context);
 }
@@ -130,14 +135,7 @@ export const drawBrownianMition = (
 
   let time = new Date().getTime();
 
-  const simulationSpeed = 0.5;
-
-  const maxSpeed = {
-    X: 0,
-    S: 0,
-    A: 0,
-    DOTa: 0,
-  };
+  const simulationSpeed = 0.1;
 
   setOnFeed({
     feed: () => {
@@ -162,37 +160,57 @@ export const drawBrownianMition = (
     const arrowsCount = 5;
 
     function formatSpeed(key) {
-      return Math.max(
-        Math.min(
-          Math.round((speed[key] / MAX_SPEED[key]) * arrowsCount),
-          arrowsCount
-        ),
-        -arrowsCount
-      );
+      let abs = Math.abs(speed[key])
+      for (let i = 0; i < MAX_SPEED[key].length; ++i) {
+        if (abs < MAX_SPEED[key][i]) {
+          if (speed[key] > 0) {
+            return +i;
+          } else {
+            return -i;
+          }
+        }
+      }
+
+      if (speed[key] > 0) {
+        return MAX_SPEED[key].length;
+      } else {
+        return -MAX_SPEED[key].length;
+      }
     }
 
-    maxSpeed.X = formatSpeed("X");
-    maxSpeed.S = formatSpeed("S");
-    maxSpeed.A = formatSpeed("A");
-    maxSpeed.DOTa = formatSpeed("DOTa");
+    let speed_indicator = {
+      X: formatSpeed("X"),
+      S: formatSpeed("S"),
+      A: formatSpeed("A"),
+      DOTa: formatSpeed("DOTa")
+    }
 
     setSpeed({
-      getSpeed: () => maxSpeed
+      getSpeed: () => speed_indicator
     })
 
     reactorState = nextState;
     canvasState = prepareCanvasData(nextState);
-    //console.log(maxSpeed, speed, nextState)
 
     if (canvasState.bacteriaCount > bacteriaDots.length) {
+      let newDots = generateDots(
+        canvas,
+        canvasState.bacteriaCount - bacteriaDots.length,
+        dotRadiusBacteria,
+        dotColorBacteria
+      )
+
+       if (bacteriaDots.length > 0) {
+         for (let i = 0; i < newDots.length; ++i) {
+           let j = Math.floor(Math.random() * bacteriaDots.length);
+           newDots[i].x = (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].x;
+           newDots[i].y = (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].y;
+         }
+       }
+
       bacteriaDots = [
         ...bacteriaDots,
-        ...generateDots(
-          canvas,
-          canvasState.bacteriaCount - bacteriaDots.length,
-          dotRadiusBacteria,
-          dotColorBacteria
-        ),
+        ...newDots,
       ];
     }
 
