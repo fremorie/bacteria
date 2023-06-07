@@ -7,7 +7,7 @@ export const parameters = {
   Y_as: 0.8283,
   K_ia: 1.0062,
   K_s: 0.0305,
-  K_0: 0.0001,
+  K_0: 0.1,
   K_ap: 0.4,
   K_is: 1.5,
   K_sa: 0.0076,
@@ -23,9 +23,9 @@ export const parameters = {
 
 export const initial_state = {
   // bacteria count (relative, grams)
-  X: 0.1,
+  X: 1,
   // glucose count (grams)
-  S: 5,
+  S: 10,
   // acetate
   A: 0,
   // dissolved oxygen tension
@@ -35,7 +35,7 @@ export const initial_state = {
 export const MAX_STATE = {
   X: 20,
   S: 20,
-  A: 10,
+  A: 1,
   DOTa: 1,
 };
 
@@ -69,7 +69,7 @@ const COLORS = {
 const formatAcetateColor = (A) => {
   const alpha = Math.min(A / MAX_STATE.A, 1);
   const color = COLORS.A[0].map(
-    (rgb, index) => rgb * alpha + (1 - alpha) * COLORS.A[1][index]
+    (rgb, index) => rgb * (1 - alpha) + alpha * COLORS.A[1][index]
   );
 
   return color;
@@ -79,7 +79,7 @@ const formatOxygenColor = (DOTa) => {
   const alpha = DOTa / MAX_STATE.DOTa;
   //const color = alpha * COLORS.DOTa[0] + (1 - alpha) * COLORS.DOTa[1]
   const color = COLORS.DOTa[0].map(
-    (rgb, index) => rgb * alpha + (1 - alpha) * COLORS.DOTa[1][index]
+    (rgb, index) => rgb * (1 - alpha) + alpha * COLORS.DOTa[1][index]
   );
 
   return color;
@@ -90,7 +90,8 @@ const sumColors = (colorA, colorB) => {
 };
 
 export const feed = (state) => {
-  const feedInc = 1;
+  console.log("feed");
+  const feedInc = 10;
 
   return {
     ...state,
@@ -107,6 +108,13 @@ export const prepareCanvasData = (state) => {
       formatAcetateColor(state.A)
     ),
   };
+};
+
+export const MAX_SPEED = {
+  X: 3,
+  A: 0.03,
+  S: 6,
+  DOTa: 100,
 };
 
 function f(state, parameters) {
@@ -167,5 +175,5 @@ export function solve(n, dt, initial_state, parameters) {
     state = clip(state);
   }
 
-  return state;
+  return [state, f(state, parameters)];
 }

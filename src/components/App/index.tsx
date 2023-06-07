@@ -12,16 +12,22 @@ import {
 } from "#utils/index";
 
 const App = () => {
+  const [feedState, setOnFeed] = React.useState<{ feed: () => void }>({
+    feed: () => {
+      console.log("initial feed");
+    },
+  });
+
   return (
     <S.Page>
       <S.Container>
         <Stats bacteriaSpeed={100} acetateSpeed={80} glucoseSpeed={-50} />
-        <Reactor />
+        <S.ButtonContainer>
+          <Reactor setOnFeed={(feed: any) => setOnFeed(feed)} />
+          <FeedButton onClick={feedState.feed} />
+        </S.ButtonContainer>
         <S.GlobalStyle />
       </S.Container>
-      <S.ButtonContainer>
-        <FeedButton onClick={() => console.log("FEED!")} />
-      </S.ButtonContainer>
     </S.Page>
   );
 };

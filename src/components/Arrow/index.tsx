@@ -3,6 +3,7 @@ import React from "react";
 import * as S from "./styles";
 
 type Props = {
+  // -5 to 5
   speed: number;
 };
 

@@ -19,8 +19,10 @@ export const Page = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
+  flex-direction: column;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
 `;

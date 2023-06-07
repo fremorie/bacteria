@@ -1,5 +1,12 @@
 import * as utils from "./utils";
-import { parameters, prepareCanvasData, solve, initial_state } from "#utils";
+import {
+  parameters,
+  prepareCanvasData,
+  solve,
+  initial_state,
+  MAX_SPEED,
+  feed,
+} from "#utils";
 
 function Ball(radius, color) {
   if (radius === undefined) {
@@ -89,7 +96,8 @@ export const drawBrownianMition = (
     dotRadius: 3,
     numDots: 0,
     friction: 0.95,
-  }
+  },
+  setOnFeed = () => {}
 ) => {
   const {
     numDots: numDotsBacteria,
@@ -121,7 +129,21 @@ export const drawBrownianMition = (
 
   let time = new Date().getTime();
 
-  const simulationSpeed = 0.1;
+  const simulationSpeed = 0.5;
+
+  const maxSpeed = {
+    X: 0,
+    S: 0,
+    A: 0,
+    DOTa: 0,
+  };
+
+  setOnFeed({
+    feed: () => {
+      console.log("set on feed");
+      reactorState = feed(reactorState);
+    },
+  });
 
   return function drawFrame() {
     const timeDiff = new Date().getTime() - time;
@@ -130,14 +152,33 @@ export const drawBrownianMition = (
     window.requestAnimationFrame(drawFrame, canvas);
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    const nextState = solve(
+    const [nextState, speed] = solve(
       1000,
       timeDiff * simulationSpeed * 1e-6,
       reactorState,
       parameters
     );
+
+    const arrowsCount = 5;
+
+    function formatSpeed(key) {
+      return Math.max(
+        Math.min(
+          Math.round((speed[key] / MAX_SPEED[key]) * arrowsCount),
+          arrowsCount
+        ),
+        -arrowsCount
+      );
+    }
+
+    maxSpeed.X = formatSpeed("X");
+    maxSpeed.S = formatSpeed("S");
+    maxSpeed.A = formatSpeed("A");
+    maxSpeed.DOTa = formatSpeed("DOTa");
+
     reactorState = nextState;
     canvasState = prepareCanvasData(nextState);
+    //console.log(maxSpeed, speed, nextState)
 
     if (canvasState.bacteriaCount > bacteriaDots.length) {
       bacteriaDots = [
@@ -172,6 +213,11 @@ export const drawBrownianMition = (
       const deleteCount = glucoseDots.length - canvasState.glucoseCount;
       glucoseDots.splice(0, deleteCount);
     }
+
+    const [r, g, b] = canvasState.color;
+
+    context.fillStyle = `rgb(${r}, ${g}, ${b})`;
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     bacteriaDots.forEach((dot) =>
       draw(dot, canvas, context, bacteria.friction)

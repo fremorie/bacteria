@@ -7,14 +7,15 @@ import {
   parameters,
   prepareCanvasData,
 } from "#utils/index";
+// @ts-ignore
+import reactorImg from "../../static/reactor.png";
 import * as S from "./styles";
 
 type Props = {
-  bacteriaCount?: number;
-  glucoseCount?: number;
+  setOnFeed?: any;
 };
 
-const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
+const Reactor = ({ setOnFeed }: Props) => {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
   const drawBacteria = () => {
@@ -32,7 +33,9 @@ const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
     const canvas = canvasRef.current;
     const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
 
-    window.requestAnimationFrame(drawBrownianMition(canvas, ctx));
+    window.requestAnimationFrame(
+      drawBrownianMition(canvas, ctx, undefined, undefined, setOnFeed)
+    );
   };
 
   React.useEffect(() => {
@@ -43,7 +46,12 @@ const Reactor = ({ bacteriaCount, glucoseCount }: Props) => {
     drawGlucose();
   }, []);
 
-  return <S.Canvas height="300px" width="500px" ref={canvasRef} />;
+  return (
+    <S.Container>
+      <S.ReactorImg src={reactorImg} />
+      <S.Canvas height="559px" width="340px" ref={canvasRef} />
+    </S.Container>
+  );
 };
 
 export default Reactor;

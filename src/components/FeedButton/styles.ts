@@ -15,6 +15,7 @@ const arrowAnimation = keyframes`
 `;
 
 export const Button = styled.button`
+  margin-top: 20px;
   position: relative;
   display: flex;
   justify-content: center;
