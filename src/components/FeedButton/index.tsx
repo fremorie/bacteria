@@ -11,7 +11,6 @@ type Props = {
 const FeedButton = ({ onClick }: Props) => {
   return (
     <S.Button onClick={onClick}>
-      <S.Img src={yasuo} />
       FEED
     </S.Button>
   );
