@@ -3,7 +3,12 @@ import styled, { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Exo', sans-serif;
+    
+    body {
+      background-color: #EFEFF3;
+      overflow: hidden;
+    }
   }
 `;
 
@@ -12,6 +17,9 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   padding: 20px;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const Page = styled.div`
@@ -21,7 +29,6 @@ export const Page = styled.div`
 
 export const ButtonContainer = styled.div`
   flex-direction: column;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

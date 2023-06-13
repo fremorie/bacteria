@@ -103,7 +103,7 @@ export const drawBrownianMition = (
     friction: 0.95,
   },
   setOnFeed = () => {},
-  setSpeed = () => {},
+  setSpeed = () => {}
 ) => {
   const {
     numDots: numDotsBacteria,
@@ -160,7 +160,7 @@ export const drawBrownianMition = (
     const arrowsCount = 5;
 
     function formatSpeed(key) {
-      let abs = Math.abs(speed[key])
+      let abs = Math.abs(speed[key]);
       for (let i = 0; i < MAX_SPEED[key].length; ++i) {
         if (abs < MAX_SPEED[key][i]) {
           if (speed[key] > 0) {
@@ -182,12 +182,12 @@ export const drawBrownianMition = (
       X: formatSpeed("X"),
       S: formatSpeed("S"),
       A: formatSpeed("A"),
-      DOTa: formatSpeed("DOTa")
-    }
+      DOTa: formatSpeed("DOTa"),
+    };
 
     setSpeed({
-      getSpeed: () => speed_indicator
-    })
+      getSpeed: () => speed_indicator,
+    });
 
     reactorState = nextState;
     canvasState = prepareCanvasData(nextState);
@@ -198,20 +198,19 @@ export const drawBrownianMition = (
         canvasState.bacteriaCount - bacteriaDots.length,
         dotRadiusBacteria,
         dotColorBacteria
-      )
+      );
 
-       if (bacteriaDots.length > 0) {
-         for (let i = 0; i < newDots.length; ++i) {
-           let j = Math.floor(Math.random() * bacteriaDots.length);
-           newDots[i].x = (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].x;
-           newDots[i].y = (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].y;
-         }
-       }
+      if (bacteriaDots.length > 0) {
+        for (let i = 0; i < newDots.length; ++i) {
+          let j = Math.floor(Math.random() * bacteriaDots.length);
+          newDots[i].x =
+            (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].x;
+          newDots[i].y =
+            (2 * Math.random() - 1) * dotRadiusBacteria + bacteriaDots[j].y;
+        }
+      }
 
-      bacteriaDots = [
-        ...bacteriaDots,
-        ...newDots,
-      ];
+      bacteriaDots = [...bacteriaDots, ...newDots];
     }
 
     if (canvasState.bacteriaCount < bacteriaDots.length) {

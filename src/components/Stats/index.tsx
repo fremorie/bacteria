@@ -4,17 +4,22 @@ import Arrow from "#components/Arrow";
 import * as S from "./styles";
 
 type Props = {
-    getSpeed: () => {
-        X: number;
-        S: number;
-        A: number;
-        DOTa: number;
-    }
+  getSpeed: () => {
+    X: number;
+    S: number;
+    A: number;
+    DOTa: number;
+  };
 };
 
 const Stats = ({ getSpeed }: Props) => {
-    const {X: bacteriaSpeed, S: glucoseSpeed, A: acetateSpeed, DOTa: oxygenSpeed} = getSpeed()
-    console.log(bacteriaSpeed, glucoseSpeed, acetateSpeed, oxygenSpeed)
+  const {
+    X: bacteriaSpeed,
+    S: glucoseSpeed,
+    A: acetateSpeed,
+    DOTa: oxygenSpeed,
+  } = getSpeed();
+  console.log(bacteriaSpeed, glucoseSpeed, acetateSpeed, oxygenSpeed);
   return (
     <S.Container>
       <S.Speedometer>
@@ -29,10 +34,10 @@ const Stats = ({ getSpeed }: Props) => {
         <Arrow speed={acetateSpeed} />
         <S.Label>Acetate</S.Label>
       </S.Speedometer>
-        <S.Speedometer>
-            <Arrow speed={oxygenSpeed} />
-            <S.Label>Oxygen</S.Label>
-        </S.Speedometer>
+      <S.Speedometer>
+        <Arrow speed={oxygenSpeed} />
+        <S.Label>Oxygen</S.Label>
+      </S.Speedometer>
     </S.Container>
   );
 };

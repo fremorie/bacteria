@@ -118,14 +118,15 @@ export const MAX_SPEED = {
 
 export function derivatives(state, parameters) {
   let q_s =
-    ((parameters.q_Smax * parameters.K_ia) / (parameters.K_ia + state.A)) *
-      state.S / (state.S + parameters.K_s);
-  let q_sof = parameters.p_Amax * q_s / (q_s + parameters.K_ap);
-  let q_sox = (q_s - q_sof) * state.DOTa / (state.DOTa + parameters.K_0);
+    (((parameters.q_Smax * parameters.K_ia) / (parameters.K_ia + state.A)) *
+      state.S) /
+    (state.S + parameters.K_s);
+  let q_sof = (parameters.p_Amax * q_s) / (q_s + parameters.K_ap);
+  let q_sox = ((q_s - q_sof) * state.DOTa) / (state.DOTa + parameters.K_0);
   let q_sA =
-    parameters.q_Amax *
-    parameters.K_is / (parameters.K_is + q_s) *
-    state.A / (state.A + parameters.K_sa);
+    (((parameters.q_Amax * parameters.K_is) / (parameters.K_is + q_s)) *
+      state.A) /
+    (state.A + parameters.K_sa);
 
   let mu =
     (q_sox - parameters.q_m) * parameters.Y_em +
@@ -135,8 +136,9 @@ export function derivatives(state, parameters) {
   let p_A = q_sof * parameters.Y_as;
   let q_A = p_A - q_sA;
 
-  let DOTadt = parameters.K_La * (parameters.DOT_star - state.DOTa) -
-      q_o * state.X * parameters.H
+  let DOTadt =
+    parameters.K_La * (parameters.DOT_star - state.DOTa) -
+    q_o * state.X * parameters.H;
 
   if (state.DOTa > 0.99 && DOTadt > 0) {
     DOTadt = 0;
