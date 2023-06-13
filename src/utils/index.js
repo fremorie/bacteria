@@ -2,8 +2,8 @@ export const parameters = {
   Y_em: 0.55,
   Y_xsof: 0.2,
   Y_xa: 0.55,
-  Y_os: 0.35, // 1.5,
-  Y_oa: 0.125, // 0.5,
+  Y_os: 0.175, // 1.5,
+  Y_oa: 0.0625, // 0.5,
   Y_as: 0.9,
   K_ia: 0.1, //1.25,
   K_s: 0.0305,
@@ -23,7 +23,7 @@ export const parameters = {
 
 export const initial_state = {
   // bacteria count (relative, grams)
-  X: 1,
+  X: 10,
   // glucose count (grams)
   S: 5,
   // acetate
@@ -110,10 +110,10 @@ export const prepareCanvasData = (state) => {
 };
 
 export const MAX_SPEED = {
-  X: [0.1, 0.2, 0.4, 0.8, 1.6],
-  A: [0.025, 0.5, 0.1, 0.2, 0.4],
-  S: [0.1, 0.2, 0.4, 0.8, 1.6],
-  DOTa: [0.01, 0.02, 0.04, 0.08, 0.16],
+  X:    [0.00625, 0.0125, 0.025, 0.05,  0.1,  0.2,  0.4,  0.8, 1.6, 3.2, 6.4],
+  A:    [0.00625, 0.0125, 0.025, 0.05,  0.1,  0.2,  0.4,  0.8, 1.6, 3.2, 6.4],
+  S:    [0.00625, 0.0125, 0.025, 0.05,  0.1,  0.2,  0.4,  0.8, 1.6, 3.2, 6.4],
+  DOTa: [0.00625, 0.0125, 0.025, 0.05,  0.1,  0.2,  0.4,  0.8, 1.6, 3.2, 6.4],
 };
 
 export function derivatives(state, parameters) {
