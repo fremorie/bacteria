@@ -28,7 +28,7 @@ const Arrow = ({ speed }: Props) => {
         {speed < 0 && (
           <S.ArrowsContainer $speed={speed}>
             {[...Array(Math.abs(speed)).keys()].map((tick) => (
-              <S.SvgContainer $speed={speed} key={tick}>
+              <S.SvgContainer $speed={speed} key={`decrease-${tick}`}>
                 <ArrowIcon speed={speed} />
               </S.SvgContainer>
             ))}
@@ -40,7 +40,7 @@ const Arrow = ({ speed }: Props) => {
         {speed > 0 && (
           <S.ArrowsContainer $speed={speed}>
             {[...Array(Math.abs(speed)).keys()].map((tick) => (
-              <S.SvgContainer $speed={speed} key={tick}>
+              <S.SvgContainer $speed={speed} key={`increase-${tick}`}>
                 <ArrowIcon speed={speed} />
               </S.SvgContainer>
             ))}

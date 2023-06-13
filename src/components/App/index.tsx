@@ -3,7 +3,8 @@ import React from "react";
 import Reactor from "#components/Reactor";
 import Stats from "#components/Stats";
 import FeedButton from "#components/FeedButton";
-import Header from '#components/Header'
+import Header from "#components/Header";
+import Legend from "#components/Legend";
 import * as S from "./styles";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
     <S.Page>
+      <Header />
       <S.Container>
         <Stats getSpeed={speedState.getSpeed} />
         <S.ButtonContainer>
@@ -34,6 +36,7 @@ const App = () => {
           <FeedButton onClick={feedState.feed} />
         </S.ButtonContainer>
         <S.GlobalStyle />
+        <Legend />
       </S.Container>
     </S.Page>
   );

@@ -55,7 +55,7 @@ export const formatGlucose = (S) => {
   return Math.round((S / MAX_STATE.S) * MAX_DOTS.S);
 };
 
-const COLORS = {
+export const COLORS = {
   A: [
     [0, 0, 0],
     [0, 255, 0],

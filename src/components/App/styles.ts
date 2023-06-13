@@ -18,7 +18,7 @@ export const Container = styled.div`
   justify-content: space-around;
   padding: 20px;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   overflow: hidden;
 `;
 

@@ -9,11 +9,7 @@ type Props = {
 };
 
 const FeedButton = ({ onClick }: Props) => {
-  return (
-    <S.Button onClick={onClick}>
-      FEED
-    </S.Button>
-  );
+  return <S.Button onClick={onClick}>FEED</S.Button>;
 };
 
 export default FeedButton;
