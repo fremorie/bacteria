@@ -17,13 +17,23 @@ const Legend = () => {
       </S.Speedometer>
       <S.Speedometer>
         <S.Colors>
-          <Color from={COLORS.A[0]} to={COLORS.A[1]} />
+          <Color
+            from={COLORS.A[0]}
+            to={COLORS.A[1]}
+            labelA={"low"}
+            labelB={"high"}
+          />
         </S.Colors>
         <S.Label>Acetate</S.Label>
       </S.Speedometer>
       <S.Speedometer>
         <S.Colors>
-          <Color from={COLORS.DOTa[0]} to={COLORS.DOTa[1]} />
+          <Color
+            from={COLORS.DOTa[0]}
+            to={COLORS.DOTa[1]}
+            labelA={"min"}
+            labelB={"max"}
+          />
         </S.Colors>
         <S.Label>Oxygen</S.Label>
       </S.Speedometer>

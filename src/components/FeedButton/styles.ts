@@ -43,6 +43,10 @@ export const Button = styled.button`
       opacity: 1;
     }
   }
+
+  &:active {
+    background: #500909;
+  }
 `;
 
 export const Img = styled.img`

@@ -14,9 +14,9 @@ export const Container = styled.div`
 export const ColorSample = styled.div<{ $from: string; $to: string }>`
   height: 20px;
   width: 150px;
-  border: 1px solid black;
   background: ${(props) =>
     `linear-gradient(90deg, ${props.$from} 0%, ${props.$to} 100%)`};
+  border-radius: 4px;
 `;
 
 export const Label = styled.p`
