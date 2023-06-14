@@ -1,8 +1,8 @@
 import React from "react";
 
 // @ts-ignore
-import yasuo from "../../static/yasuo.jpg";
-import * as S from "./styles";
+import yasuo from "../../../static/yasuo.jpg";
+import * as S from "../styles";
 
 type Props = {
   onClick?: () => void;

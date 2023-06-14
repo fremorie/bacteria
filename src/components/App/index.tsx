@@ -1,45 +1,90 @@
 import React from "react";
+import { v4 as uuid } from "uuid";
 
-import Reactor from "#components/Reactor";
-import Stats from "#components/Stats";
-import FeedButton from "#components/FeedButton";
+import Countdown, { CountdownApi } from "react-countdown";
+import ReactorApp from "#components/ReactorApp";
 import Header from "#components/Header";
-import Legend from "#components/Legend";
+import Timer from "#components/Timer";
 import * as S from "./styles";
 
-const App = () => {
-  const [feedState, setOnFeed] = React.useState<{ feed: () => void }>({
-    feed: () => {
-      console.log("initial feed");
-    },
-  });
+type LeaderboardEntry = {
+  name: string;
+  score: number;
+};
 
-  const [speedState, setSpeed] = React.useState<any>({
-    getSpeed: () => ({
-      X: 0,
-      A: 0,
-      S: 0,
-      DOTa: 0,
-    }),
-  });
+const App = ({ isFinished, setIsFinished, handleAddToLeaderboard }: any) => {
+  const [isCountdownInProgress, setIsCountdownInProgress] =
+    React.useState(false);
+  const countdownRef = React.useRef<CountdownApi | null>(null);
+  const [simulationId, setSimulationId] = React.useState("123");
+
+  const setCountdownRef = (countdown: Countdown | null): void => {
+    if (countdown) {
+      countdownRef.current = countdown.getApi();
+    }
+  };
+
+  const handleStart = () => {
+    countdownRef.current!.start();
+    setIsCountdownInProgress(true);
+    setSimulationId(uuid());
+    setIsFinished(false);
+  };
+
+  const handleReset = () => {
+    setSimulationId(uuid());
+  };
+
+  const handleComplete = () => {
+    setIsCountdownInProgress(false);
+    setSimulationId(uuid());
+    setIsFinished(true);
+  };
 
   return (
     <S.Page>
+      <S.GlobalStyle />
       <Header />
-      <S.Container>
-        <Stats getSpeed={speedState.getSpeed} />
-        <S.ButtonContainer>
-          <Reactor
-            setOnFeed={(feed: any) => setOnFeed(feed)}
-            setSpeed={(currentSpeed: any) => setSpeed(currentSpeed)}
-          />
-          <FeedButton onClick={feedState.feed} />
-        </S.ButtonContainer>
-        <S.GlobalStyle />
-        <Legend />
-      </S.Container>
+      <Timer setRef={setCountdownRef} onComplete={handleComplete} />
+      <ReactorApp
+        isCountdownInProgress={isCountdownInProgress}
+        onStart={handleStart}
+        onReset={handleReset}
+        simulationId={simulationId}
+        isGameFinished={isFinished}
+        onAddToLeaderboard={handleAddToLeaderboard}
+      />
     </S.Page>
   );
 };
 
-export default App;
+const LOCAL_STORAGE_KEY = "bacteria_leaderboard";
+
+const Main = () => {
+  const [leaderboard, setLeaderboard] = React.useState<Array<LeaderboardEntry>>(
+    []
+  );
+  const [isFinished, setIsFinished] = React.useState(false);
+
+  const handleAddToLeaderboard = ({ name, score }: LeaderboardEntry) => {
+    const savedLeaderboard = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
+    );
+    const updatedLeaderboard = [...savedLeaderboard, { score, name }];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLeaderboard));
+
+    setLeaderboard([...leaderboard, { name, score }]);
+
+    setIsFinished(false);
+  };
+
+  return (
+    <App
+      isFinished={isFinished}
+      setIsFinished={setIsFinished}
+      handleAddToLeaderboard={handleAddToLeaderboard}
+    />
+  );
+};
+
+export default Main;

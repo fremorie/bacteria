@@ -1,6 +1,6 @@
 import React from "react";
 
-import { drawBrownianMition } from "#utils/brownianMotion";
+import { drawBrownianMotion } from "#utils/brownianMotion";
 // @ts-ignore
 import reactorImg from "../../static/reactor.png";
 import * as S from "./styles";
@@ -8,25 +8,47 @@ import * as S from "./styles";
 type Props = {
   setOnFeed?: any;
   setSpeed: any;
+  simulationId: string;
+  setBacteriumCount: (count: number) => void;
+  onReset?: () => void;
 };
 
-const Reactor = ({ setOnFeed, setSpeed }: Props) => {
+const Reactor = ({
+  setOnFeed,
+  setSpeed,
+  simulationId,
+  setBacteriumCount,
+}: Props) => {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
-  const drawParticles = () => {
+  const requestIdRef = React.useRef<number | null>(null);
+
+  const setRequestId = (tick: any) => {
+    requestIdRef.current = requestAnimationFrame(tick);
+  };
+
+  React.useEffect(() => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
 
-    window.requestAnimationFrame(
-      drawBrownianMition(canvas, ctx, undefined, undefined, setOnFeed, setSpeed)
+    const tick = drawBrownianMotion(
+      canvas,
+      ctx,
+      undefined,
+      undefined,
+      setOnFeed,
+      setSpeed,
+      setBacteriumCount,
+      setRequestId
     );
-  };
 
-  React.useEffect(() => {
-    drawParticles();
-  }, []);
+    requestIdRef.current = requestAnimationFrame(tick);
+    return () => {
+      window.cancelAnimationFrame(requestIdRef.current as number);
+    };
+  }, [simulationId]);
 
   return (
     <S.Container>

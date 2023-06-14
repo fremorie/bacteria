@@ -1,0 +1,58 @@
+import React, { LegacyRef } from "react";
+import ReactDOM from "react-dom";
+import Countdown, {
+  zeroPad,
+  calcTimeDelta,
+  formatTimeDelta,
+  CountdownTimeDelta,
+  CountdownApi,
+} from "react-countdown";
+
+import * as S from "./styles";
+
+const TIME_LIMIT = 10; // seconds
+
+// Random component
+const Completionist = () => <span>You are good to go!</span>;
+
+type RendererProps = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+const renderer = ({ hours, minutes, seconds }: RendererProps) => (
+  <S.Countdown>
+    {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+  </S.Countdown>
+);
+
+type Props = {
+  setRef: LegacyRef<Countdown>;
+  onComplete?: () => void;
+};
+
+const Timer = React.memo(({ setRef, onComplete }: Props) => {
+  const t = new Date();
+  t.setSeconds(t.getSeconds() + TIME_LIMIT);
+
+  return (
+    <S.Container>
+      <Countdown
+        date={t}
+        renderer={renderer}
+        // intervalDelay={0}
+        // precision={3}
+        autoStart={false}
+        ref={setRef}
+        //onStart={onStart}
+        //controlled={true}
+        onComplete={onComplete}
+      >
+        <Completionist />
+      </Countdown>
+    </S.Container>
+  );
+});
+
+export default Timer;

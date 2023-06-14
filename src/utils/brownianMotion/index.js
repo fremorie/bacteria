@@ -87,7 +87,7 @@ function generateDots(canvas, numDots, dotRadius, dotColor) {
   return dots;
 }
 
-export const drawBrownianMition = (
+export const drawBrownianMotion = (
   canvas,
   context,
   bacteria = {
@@ -103,7 +103,10 @@ export const drawBrownianMition = (
     friction: 0.95,
   },
   setOnFeed = () => {},
-  setSpeed = () => {}
+  setSpeed = () => {},
+  setBacteriumCount = (_x) => {},
+  setAnimationKey = (_key) => {},
+  initialState = initial_state
 ) => {
   const {
     numDots: numDotsBacteria,
@@ -130,7 +133,7 @@ export const drawBrownianMition = (
     dotColorGlucose
   );
 
-  let reactorState = initial_state;
+  let reactorState = initialState;
   let canvasState = prepareCanvasData(reactorState);
 
   let time = new Date().getTime();
@@ -147,7 +150,8 @@ export const drawBrownianMition = (
     const timeDiff = new Date().getTime() - time;
     time = new Date().getTime();
 
-    window.requestAnimationFrame(drawFrame, canvas);
+    setAnimationKey(drawFrame, canvas);
+
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     const [nextState, speed] = solve(
@@ -156,6 +160,8 @@ export const drawBrownianMition = (
       reactorState,
       parameters
     );
+
+    setBacteriumCount(nextState.X);
 
     const arrowsCount = 5;
 

@@ -26,11 +26,3 @@ export const Page = styled.div`
   height: 100%;
   width: 100%;
 `;
-
-export const ButtonContainer = styled.div`
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-`;

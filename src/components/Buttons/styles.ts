@@ -47,13 +47,8 @@ export const Button = styled.button`
   &:active {
     background: #500909;
   }
-`;
 
-export const Img = styled.img`
-  position: absolute;
-  top: 15%;
-  left: 5%;
-  height: 60%;
-  margin-right: 10px;
-  transition: opacity 0.5s;
+  & + & {
+    margin-left: 16px;
+  }
 `;

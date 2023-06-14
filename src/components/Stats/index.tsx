@@ -19,7 +19,7 @@ const Stats = ({ getSpeed }: Props) => {
     A: acetateSpeed,
     DOTa: oxygenSpeed,
   } = getSpeed();
-  console.log(bacteriaSpeed, glucoseSpeed, acetateSpeed, oxygenSpeed);
+
   return (
     <S.Container>
       <S.Speedometer>
