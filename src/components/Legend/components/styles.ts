@@ -21,7 +21,7 @@ export const ColorSample = styled.div<{ $from: string; $to: string }>`
 
 export const Label = styled.p`
   margin: 0;
-  font-size: 12px;
+  font-size: 24px;
 `;
 
 export const Labels = styled.div`

@@ -87,6 +87,11 @@ function generateDots(canvas, numDots, dotRadius, dotColor) {
   return dots;
 }
 
+function computeScore(X, X0) {
+  const score = Math.ceil((X - X0) * 100);
+  return Math.max(score, 0);
+}
+
 export const drawBrownianMotion = (
   canvas,
   context,
@@ -161,7 +166,9 @@ export const drawBrownianMotion = (
       parameters
     );
 
-    setBacteriumCount(nextState.X);
+    setBacteriumCount(
+      computeScore(nextState.X, initial_state.X)
+    );
 
     const arrowsCount = 5;
 

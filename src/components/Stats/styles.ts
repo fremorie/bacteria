@@ -22,6 +22,7 @@ export const Speedometer = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   border: 2px solid black;
+  font-size: 24px;
 
   &:last-of-type {
     margin-bottom: 0;

@@ -36,6 +36,7 @@ export const Speedometer = styled.div`
 export const Label = styled.div`
   margin-top: 8px;
   font-weight: 400;
+  font-size: 24px;
 `;
 
 export const Bacteria = styled.div`

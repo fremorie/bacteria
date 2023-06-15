@@ -24,9 +24,9 @@ type Props = {
 
 const formatCount = (count: number | undefined) => {
   if (count === undefined) {
-    return "----";
+    return "--";
   } else {
-    return String(Math.round(count * 100)).padStart(4, "0");
+    return String(count).padStart(2, "0");
   }
 };
 
