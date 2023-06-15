@@ -5,6 +5,8 @@ import Countdown, { CountdownApi } from "react-countdown";
 import ReactorApp from "#components/ReactorApp";
 import Header from "#components/Header";
 import Timer from "#components/Timer";
+import Leaderboard from "#components/Leaderboard";
+import { addEntryToLocalStorage } from "#utils/localStorage";
 import * as S from "./styles";
 
 type LeaderboardEntry = {
@@ -58,8 +60,6 @@ const App = ({ isFinished, setIsFinished, handleAddToLeaderboard }: any) => {
   );
 };
 
-const LOCAL_STORAGE_KEY = "bacteria_leaderboard";
-
 const Main = () => {
   const [leaderboard, setLeaderboard] = React.useState<Array<LeaderboardEntry>>(
     []
@@ -67,11 +67,7 @@ const Main = () => {
   const [isFinished, setIsFinished] = React.useState(false);
 
   const handleAddToLeaderboard = ({ name, score }: LeaderboardEntry) => {
-    const savedLeaderboard = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
-    );
-    const updatedLeaderboard = [...savedLeaderboard, { score, name }];
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLeaderboard));
+    addEntryToLocalStorage({ name, score });
 
     setLeaderboard([...leaderboard, { name, score }]);
 
@@ -79,11 +75,14 @@ const Main = () => {
   };
 
   return (
-    <App
-      isFinished={isFinished}
-      setIsFinished={setIsFinished}
-      handleAddToLeaderboard={handleAddToLeaderboard}
-    />
+    <React.Fragment>
+      <Leaderboard leaderboard={leaderboard} />
+      <App
+        isFinished={isFinished}
+        setIsFinished={setIsFinished}
+        handleAddToLeaderboard={handleAddToLeaderboard}
+      />
+    </React.Fragment>
   );
 };
 
