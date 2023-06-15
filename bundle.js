@@ -9,7 +9,7 @@
   position: absolute;
   top: 156px;
   left: 228px;
-`,lt=({setOnFeed:t,setSpeed:n,simulationId:r,setBacteriumCount:o})=>{const a=e.useRef(null),i=e.useRef(null),l=e=>{i.current=requestAnimationFrame(e)};return e.useEffect((()=>{if(!a.current)return;const e=a.current,r=e.getContext("2d"),s=((e,t,n={dotColor:"#57BF24",dotRadius:5,numDots:0,friction:.95},r={dotColor:"#F9F7A4",dotRadius:3,numDots:0,friction:.95},o=(()=>{}),a=(()=>{}),i=(e=>{}),l=(e=>{}),s=d)=>{const{numDots:u,dotRadius:p,dotColor:f}=n,{numDots:m,dotRadius:h,dotColor:g}=r;let w=S(e,u,p,f),C=S(e,m,h,g),E=s,Z=v(E),P=(new Date).getTime();return o({feed:()=>{var e;e=E,E={...e,S:e.S+.25}}}),function o(){const s=(new Date).getTime()-P;P=(new Date).getTime(),l(o,e),t.clearRect(0,0,e.width,e.height);const[u,d]=function(e,t,n,r){let o={...n};for(let e=0;e<1e3;++e){let e=b(o,r);o.X+=t*e.X,o.S+=t*e.S,o.A+=t*e.A,o.DOTa+=t*e.DOTa,o=x(o)}return[o,b(o,r)]}(0,.1*s*1e-6,E,c);function m(e){let t=Math.abs(d[e]);for(let n=0;n<y[e].length;++n)if(t<y[e][n])return d[e]>0?+n:-n;return d[e]>0?y[e].length:-y[e].length}i(u.X);let T={X:m("X"),S:m("S"),A:m("A"),DOTa:m("DOTa")};if(a({getSpeed:()=>T}),E=u,Z=v(u),Z.bacteriaCount>w.length){let t=S(e,Z.bacteriaCount-w.length,p,f);if(w.length>0)for(let e=0;e<t.length;++e){let n=Math.floor(Math.random()*w.length);t[e].x=(2*Math.random()-1)*p+w[n].x,t[e].y=(2*Math.random()-1)*p+w[n].y}w=[...w,...t]}if(Z.bacteriaCount<w.length){const e=w.length-Z.bacteriaCount;w.splice(0,e)}if(Z.glucoseCount>C.length&&(C=[...C,...S(e,Z.glucoseCount-C.length,h,g)]),Z.glucoseCount<C.length){const e=C.length-Z.glucoseCount;C.splice(0,e)}const[R,O,M]=Z.color;t.fillStyle=`rgb(${R}, ${O}, ${M})`,t.fillRect(0,0,e.width,e.height),w.forEach((r=>k(r,e,t,n.friction))),C.forEach((n=>k(n,e,t,r.friction)))}})(e,r,void 0,void 0,t,n,o,l);return i.current=requestAnimationFrame(s),()=>{window.cancelAnimationFrame(i.current)}}),[r]),e.createElement(ot,null,e.createElement(at,{src:C}),e.createElement(it,{height:"559px",width:"340px",ref:a}))},st=rt.div`
+`,lt=({setOnFeed:t,setSpeed:n,simulationId:r,setBacteriumCount:o})=>{const a=e.useRef(null),i=e.useRef(null),l=e=>{i.current=requestAnimationFrame(e)};return e.useEffect((()=>{if(!a.current)return;const e=a.current,r=e.getContext("2d"),s=((e,t,n={dotColor:"#57BF24",dotRadius:5,numDots:0,friction:.95},r={dotColor:"#F9F7A4",dotRadius:3,numDots:0,friction:.95},o=(()=>{}),a=(()=>{}),i=(e=>{}),l=(e=>{}),s=d)=>{const{numDots:u,dotRadius:p,dotColor:f}=n,{numDots:m,dotRadius:h,dotColor:g}=r;let w=S(e,u,p,f),C=S(e,m,h,g),E=s,Z=v(E),P=(new Date).getTime();return o({feed:()=>{var e;e=E,E={...e,S:e.S+.25}}}),function o(){const s=(new Date).getTime()-P;P=(new Date).getTime(),l(o,e),t.clearRect(0,0,e.width,e.height);const[u,m]=function(e,t,n,r){let o={...n};for(let e=0;e<1e3;++e){let e=b(o,r);o.X+=t*e.X,o.S+=t*e.S,o.A+=t*e.A,o.DOTa+=t*e.DOTa,o=x(o)}return[o,b(o,r)]}(0,.1*s*1e-6,E,c);function T(e){let t=Math.abs(m[e]);for(let n=0;n<y[e].length;++n)if(t<y[e][n])return m[e]>0?+n:-n;return m[e]>0?y[e].length:-y[e].length}i(function(e,t){const n=Math.ceil(100*(e-t));return Math.max(n,0)}(u.X,d.X));let R={X:T("X"),S:T("S"),A:T("A"),DOTa:T("DOTa")};if(a({getSpeed:()=>R}),E=u,Z=v(u),Z.bacteriaCount>w.length){let t=S(e,Z.bacteriaCount-w.length,p,f);if(w.length>0)for(let e=0;e<t.length;++e){let n=Math.floor(Math.random()*w.length);t[e].x=(2*Math.random()-1)*p+w[n].x,t[e].y=(2*Math.random()-1)*p+w[n].y}w=[...w,...t]}if(Z.bacteriaCount<w.length){const e=w.length-Z.bacteriaCount;w.splice(0,e)}if(Z.glucoseCount>C.length&&(C=[...C,...S(e,Z.glucoseCount-C.length,h,g)]),Z.glucoseCount<C.length){const e=C.length-Z.glucoseCount;C.splice(0,e)}const[O,M,A]=Z.color;t.fillStyle=`rgb(${O}, ${M}, ${A})`,t.fillRect(0,0,e.width,e.height),w.forEach((r=>k(r,e,t,n.friction))),C.forEach((n=>k(n,e,t,r.friction)))}})(e,r,void 0,void 0,t,n,o,l);return i.current=requestAnimationFrame(s),()=>{window.cancelAnimationFrame(i.current)}}),[r]),e.createElement(ot,null,e.createElement(at,{src:C}),e.createElement(it,{height:"559px",width:"340px",ref:a}))},st=rt.div`
   transform-origin: center;
   ${e=>e.$speed>0&&Le`
       transform: rotate(0deg);
@@ -71,6 +71,7 @@
   background-color: #ffffff;
   border-radius: 8px;
   border: 2px solid black;
+  font-size: 24px;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -147,7 +148,7 @@
   border-radius: 4px;
 `,Et=rt.p`
   margin: 0;
-  font-size: 12px;
+  font-size: 24px;
 `,Zt=rt.div`
   width: 100%;
   display: flex;
@@ -184,6 +185,7 @@
 `,Mt=rt.div`
   margin-top: 8px;
   font-weight: 400;
+  font-size: 24px;
 `,At=rt.div`
   height: 15px;
   width: 15px;
@@ -319,7 +321,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-`,Rl=({isCountdownInProgress:t,onStart:n,onReset:r,onCancel:o,simulationId:a,isGameFinished:i,onAddToLeaderboard:l})=>{const[s,u]=e.useState({feed:()=>{}}),[c,p]=e.useState(d.X),[f,m]=e.useState({getSpeed:()=>({X:0,A:0,S:0,DOTa:0})});return e.createElement("div",null,e.createElement(Pl,null,e.createElement(jt,{count:c})),e.createElement(Pl,null,e.createElement(bt,{getSpeed:f.getSpeed}),e.createElement(Tl,null,e.createElement(lt,{setOnFeed:e=>u(e),setSpeed:e=>m(e),simulationId:a,setBacteriumCount:e=>{i||p((e=>void 0===e?"----":String(Math.round(100*e)).padStart(4,"0"))(e))}}),e.createElement(Zl,null,t&&e.createElement(kt,{onClick:s.feed}),!t&&e.createElement($t,{onClick:n}),!t&&e.createElement(Ft,{onClick:r}))),e.createElement(_t,null)),e.createElement(El,{score:c,onSave:l,open:i,onCancel:o,onClose:o}))},Ol=rt.div`
+`,Rl=({isCountdownInProgress:t,onStart:n,onReset:r,onCancel:o,simulationId:a,isGameFinished:i,onAddToLeaderboard:l})=>{const[s,u]=e.useState({feed:()=>{}}),[c,p]=e.useState(d.X),[f,m]=e.useState({getSpeed:()=>({X:0,A:0,S:0,DOTa:0})});return e.createElement("div",null,e.createElement(Pl,null,e.createElement(jt,{count:c})),e.createElement(Pl,null,e.createElement(bt,{getSpeed:f.getSpeed}),e.createElement(Tl,null,e.createElement(lt,{setOnFeed:e=>u(e),setSpeed:e=>m(e),simulationId:a,setBacteriumCount:e=>{i||p((e=>void 0===e?"--":String(e).padStart(2,"0"))(e))}}),e.createElement(Zl,null,t&&e.createElement(kt,{onClick:s.feed}),!t&&e.createElement($t,{onClick:n}),!t&&e.createElement(Ft,{onClick:r}))),e.createElement(_t,null)),e.createElement(El,{score:c,onSave:l,open:i,onCancel:o,onClose:o}))},Ol=rt.div`
   display: flex;
   align-items: center;
   justify-content: center;
