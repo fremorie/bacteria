@@ -10,7 +10,7 @@ import Countdown, {
 
 import * as S from "./styles";
 
-const TIME_LIMIT = 10; // seconds
+const TIME_LIMIT = 30; // seconds
 
 // Random component
 const Completionist = () => <span>You are good to go!</span>;

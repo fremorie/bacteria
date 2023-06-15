@@ -1,17 +1,17 @@
 export const parameters = {
   Y_em: 0.55,
   Y_xsof: 0.2,
-  Y_xa: 0.55,
+  Y_xa: 0.25,
   Y_os: 0.175, // 1.5,
   Y_oa: 0.0625, // 0.5,
   Y_as: 0.9,
-  K_ia: 0.1, //1.25,
+  K_ia: 1.25, //1.25,
   K_s: 0.0305,
-  K_0: 0.1,
-  K_ap: 0.5,
+  K_0: 0.05,
+  K_ap: 0.25, // 0.5
   K_is: 1.5,
   K_sa: 0.0125,
-  K_La: 100,
+  K_La: 50,
   K_p: 350,
   p_Amax: 0.225,
   q_Smax: 0.632,
@@ -35,7 +35,7 @@ export const initial_state = {
 export const MAX_STATE = {
   X: 20,
   S: 20,
-  A: 0.4,
+  A: parameters.K_ia,
   DOTa: 1,
 };
 
@@ -90,7 +90,7 @@ const sumColors = (colorA, colorB) => {
 };
 
 export const feed = (state) => {
-  const feedInc = 1;
+  const feedInc = 0.25;
 
   return {
     ...state,

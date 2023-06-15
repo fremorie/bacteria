@@ -15,6 +15,14 @@ type Props = {
   onClose: () => void;
 };
 
+const formatCount = (count: number | undefined) => {
+  if (count === undefined) {
+    return '----';
+  } else {
+    return Math.round(count * 100);
+  }
+}
+
 export default function FormDialog({
   score,
   open,
@@ -33,7 +41,7 @@ export default function FormDialog({
   };
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Your score is: {score}</DialogTitle>
+      <DialogTitle>Your score is: {formatCount(score)}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Would you like your score to appear in the leaderboard?
