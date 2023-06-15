@@ -16,14 +16,13 @@ const TIME_LIMIT = 30; // seconds
 const Completionist = () => <span>You are good to go!</span>;
 
 type RendererProps = {
-  hours: number;
   minutes: number;
   seconds: number;
 };
 
-const renderer = ({ hours, minutes, seconds }: RendererProps) => (
+const renderer = ({ minutes, seconds }: RendererProps) => (
   <S.Countdown>
-    {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+    {zeroPad(minutes)}:{zeroPad(seconds)}
   </S.Countdown>
 );
 

@@ -5,8 +5,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Digital", sans-serif;
 `;
 
 export const Countdown = styled.span`
-  font-size: 30px;
+  font-size: 60px;
+  font-family: "Digital", sans-serif;
 `;

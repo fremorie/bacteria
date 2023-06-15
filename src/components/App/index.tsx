@@ -43,6 +43,10 @@ const App = ({ isFinished, setIsFinished, handleAddToLeaderboard }: any) => {
     setIsFinished(true);
   };
 
+  const handleCloseLeaderboardPopup = () => {
+    setIsFinished(false);
+  };
+
   return (
     <S.Page>
       <S.GlobalStyle />
@@ -50,6 +54,7 @@ const App = ({ isFinished, setIsFinished, handleAddToLeaderboard }: any) => {
       <Timer setRef={setCountdownRef} onComplete={handleComplete} />
       <ReactorApp
         isCountdownInProgress={isCountdownInProgress}
+        onCancel={handleCloseLeaderboardPopup}
         onStart={handleStart}
         onReset={handleReset}
         simulationId={simulationId}

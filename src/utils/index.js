@@ -19,7 +19,7 @@ export const parameters = {
   q_m: 0.03609205782413483,
   DOT_star: 0.9903120398521423,
   H: 139.87298583984375,
-}
+};
 
 export const initial_state = {
   // bacteria count (relative, grams)

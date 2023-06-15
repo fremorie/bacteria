@@ -1,6 +1,14 @@
 import styled, { createGlobalStyle } from "styled-components";
 
+// @ts-ignore
+import font from "../../static/font.ttf";
+
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Digital';
+    src: url(${font}) format('truetype');
+  }
+  
   * {
     box-sizing: border-box;
     font-family: 'Exo', sans-serif;

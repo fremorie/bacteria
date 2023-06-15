@@ -16,15 +16,25 @@ type Props = {
   isCountdownInProgress: boolean;
   onStart: () => void;
   onReset: () => void;
+  onCancel: () => void;
   simulationId: string;
   isGameFinished: boolean;
-  onAddToLeaderboard: (entry: { name: string; score: number }) => void;
+  onAddToLeaderboard: (entry: { name: string; score: number | string }) => void;
+};
+
+const formatCount = (count: number | undefined) => {
+  if (count === undefined) {
+    return "----";
+  } else {
+    return String(Math.round(count * 100)).padStart(4, "0");
+  }
 };
 
 const ReactorApp = ({
   isCountdownInProgress,
   onStart,
   onReset,
+  onCancel,
   simulationId,
   isGameFinished,
   onAddToLeaderboard,
@@ -33,7 +43,7 @@ const ReactorApp = ({
     feed: () => {},
   });
 
-  const [bacteriumCount, setBacteriumCount] = React.useState<number>(
+  const [bacteriumCount, setBacteriumCount] = React.useState<number | string>(
     initial_state.X
   );
 
@@ -48,11 +58,9 @@ const ReactorApp = ({
 
   const handleSetBacteriumCount = (count: number) => {
     if (!isGameFinished) {
-      setBacteriumCount(count);
+      setBacteriumCount(formatCount(count));
     }
   };
-
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   return (
     <div>
@@ -80,8 +88,8 @@ const ReactorApp = ({
         score={bacteriumCount}
         onSave={onAddToLeaderboard}
         open={isGameFinished}
-        onCancel={() => {}}
-        onClose={() => {}}
+        onCancel={onCancel}
+        onClose={onCancel}
       />
     </div>
   );
