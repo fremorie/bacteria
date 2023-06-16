@@ -11,15 +11,17 @@ const Footer = () => {
         Escherichia coli by acetate cycling. Biochemical engineering journal.
         2017 Sep 15;125:23-30.
       </em>
-      with modified parameters. / Basierend auf dem makrokinetischen
-      Wachstumsmodell von
-      <em>
-        Anane E, Neubauer P, Bournazou MN. Modelling overflow metabolism in
-        Escherichia coli by acetate cycling. Biochemical engineering journal.
-        2017 Sep 15;125:23-30.
-      </em>
-      mit geänderten Parametern. Simulation is significantly accelerated in time
-      (10 seconds = 1 hour). / Die Simulation wird zeitlich deutlich
+        {' '} with modified parameters. Simulation is significantly accelerated in time
+      (10 seconds = 1 hour).
+        / Basierend auf dem makrokinetischen
+        Wachstumsmodell von
+        <em>
+            Anane E, Neubauer P, Bournazou MN. Modelling overflow metabolism in
+            Escherichia coli by acetate cycling. Biochemical engineering journal.
+            2017 Sep 15;125:23-30.
+        </em>
+        {' '}mit geänderten Parametern.
+        Die Simulation wird zeitlich deutlich
       beschleunigt (10 Sekunden = 1 Stunde).
       <br />
       Created by{" "}
