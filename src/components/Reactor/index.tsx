@@ -27,11 +27,31 @@ const Reactor = ({
     requestIdRef.current = requestAnimationFrame(tick);
   };
 
+  const updateCanvasSize = (ctx: CanvasRenderingContext2D) => {
+    ctx.canvas.width =
+      (S.canvasWidthDefault / S.imgSizeDefault) * (window.innerHeight / 2);
+    ctx.canvas.height =
+      (S.canvasHeightDefault / S.imgSizeDefault) * (window.innerHeight / 2);
+  };
+
+  const handleResize = () => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
+
+    updateCanvasSize(ctx);
+  };
+
   React.useEffect(() => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
+
+    updateCanvasSize(ctx);
+
+    window.addEventListener("resize", handleResize);
 
     const tick = drawBrownianMotion(
       canvas,
@@ -51,9 +71,10 @@ const Reactor = ({
   }, [simulationId]);
 
   return (
-    <S.Container>
+    // @ts-ignore
+    <S.Container onResize={handleResize}>
       <S.ReactorImg src={reactorImg} />
-      <S.Canvas height="559px" width="340px" ref={canvasRef} />
+      <S.Canvas ref={canvasRef} />
     </S.Container>
   );
 };
