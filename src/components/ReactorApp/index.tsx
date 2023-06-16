@@ -67,7 +67,7 @@ const ReactorApp = ({
       <S.Row>
         <BacteriumCounter count={bacteriumCount} />
       </S.Row>
-      <S.Row>
+      <S.MainRow>
         <Stats getSpeed={speedState.getSpeed} />
         <S.Column>
           <Reactor
@@ -83,7 +83,7 @@ const ReactorApp = ({
           </S.ButtonsContainer>
         </S.Column>
         <Legend />
-      </S.Row>
+      </S.MainRow>
       <FormDialog
         score={bacteriumCount}
         onSave={onAddToLeaderboard}

@@ -29,6 +29,27 @@ export const Row = styled.div`
   align-items: center;
 `;
 
+export const MainRow = styled(Row)`
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    /* stats */
+    & > :nth-child(1) {
+      order: 2;
+    }
+
+    /* reactor */
+    & > :nth-child(2) {
+      order: 1;
+    }
+
+    /* legend */
+    & > :nth-child(3) {
+      order: 3;
+    }
+  }
+`;
+
 export const Column = styled.div`
   display: flex;
   flex-direction: column;

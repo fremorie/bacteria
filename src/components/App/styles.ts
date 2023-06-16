@@ -37,5 +37,5 @@ export const AppContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 98vh;
+  min-height: 98vh;
 `;

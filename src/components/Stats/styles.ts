@@ -8,7 +8,10 @@ export const Container = styled.div`
   border: 2px solid black;
   padding: 16px;
   background-color: #a28cbc;
-  transform: translateY(-50px);
+
+  @media (max-width: 768px) {
+    margin: 16px 0;
+  }
 `;
 
 export const Speedometer = styled.div`

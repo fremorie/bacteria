@@ -8,5 +8,5 @@ export const Container = styled.div`
 
 export const Text = styled.h1`
   font-size: 50px;
-  margin: 40px 0 0 0;
+  margin: 0;
 `;
