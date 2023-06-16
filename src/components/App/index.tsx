@@ -6,6 +6,7 @@ import ReactorApp from "#components/ReactorApp";
 import Header from "#components/Header";
 import Timer from "#components/Timer";
 import Leaderboard from "#components/Leaderboard";
+import Footer from "#components/Footer";
 import { addEntryToLocalStorage } from "#utils/localStorage";
 import * as S from "./styles";
 
@@ -80,14 +81,15 @@ const Main = () => {
   };
 
   return (
-    <React.Fragment>
+    <S.AppContainer>
       <Leaderboard leaderboard={leaderboard} />
       <App
         isFinished={isFinished}
         setIsFinished={setIsFinished}
         handleAddToLeaderboard={handleAddToLeaderboard}
       />
-    </React.Fragment>
+      <Footer />
+    </S.AppContainer>
   );
 };
 

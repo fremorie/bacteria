@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     
     body {
       background-color: #EFEFF3;
-      overflow: hidden;
     }
   }
 `;
@@ -26,11 +25,17 @@ export const Container = styled.div`
   justify-content: space-around;
   padding: 20px;
   align-items: center;
-  height: 80vh;
-  overflow: hidden;
 `;
 
 export const Page = styled.div`
   height: 100%;
   width: 100%;
+`;
+
+export const AppContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 98vh;
 `;
