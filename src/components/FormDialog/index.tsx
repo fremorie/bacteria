@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { SyntheticEvent } from "react";
 
 type Props = {
   score: number | string;
@@ -28,11 +29,16 @@ export default function FormDialog({
     setName(event.target.value);
   };
 
+  const handleClose = (event: SyntheticEvent, reason: string) => {
+    if (reason && reason == "backdropClick" && "escapeKeyDown") return;
+    onClose();
+  };
+
   const handleSave = () => {
     onSave({ name, score });
   };
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Your score is: {score}</DialogTitle>
       <DialogContent>
         <DialogContentText>

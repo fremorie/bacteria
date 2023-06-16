@@ -166,9 +166,7 @@ export const drawBrownianMotion = (
       parameters
     );
 
-    setBacteriumCount(
-      computeScore(nextState.X, initial_state.X)
-    );
+    setBacteriumCount(computeScore(nextState.X, initial_state.X));
 
     const arrowsCount = 5;
 
