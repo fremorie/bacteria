@@ -8,7 +8,7 @@ const canvasTopDefault = 156;
 const canvasLeftDefault = 229;
 export const imgSizeDefault = 800;
 export const canvasHeightDefault = 559;
-export const canvasWidthDefault = 340;
+export const canvasWidthDefault = 342;
 
 const canvasTop = `${canvasTopDefault / (imgSizeDefault / 100)}%`;
 const canvasLeft = `${canvasLeftDefault / (imgSizeDefault / 100)}%`;
