@@ -1,5 +1,9 @@
 # bacteria
 
+Demo: [fremorie.github.io/bacteria](https://fremorie.github.io/bacteria/)
+
+<img width="800px" src="https://github.com/fremorie/bacteria/assets/16775590/ecf287eb-96b2-42d4-afd6-118dc2fff191" />
+
 ```bash
 npm install
 
